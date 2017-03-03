@@ -30,6 +30,9 @@
     "react": "^15.4.2",
     "react-addons-test-utils": "^15.4.2",
     "react-dom": "^15.4.2",
+    "sinon": "next",
+    "sinon-stub-promise": "^4.0.0",
+    "text-loader": "^0.0.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"
   },

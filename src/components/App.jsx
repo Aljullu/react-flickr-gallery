@@ -1,12 +1,15 @@
 import React from 'react';
 
+import Gallery from './Gallery.jsx';
+
 /**
  * App Root Component, contains the app
  */
 export default class App extends React.Component {
   render() {
     return (
-      <p>React Gallery</p>
+      <Gallery
+        galleryId="72157675104433185" />
     );
   }
 }
