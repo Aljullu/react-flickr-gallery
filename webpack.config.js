@@ -16,10 +16,27 @@ module.exports = {
   },
   module: {
     rules: [
-      {enforce: 'pre', test: /\.jsx?$/,
-        loaders: ['eslint-loader'], include: /src/},
-      {test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/},
-      {test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/}
+      {
+        enforce: 'pre',
+        test: /\.jsx?$/,
+        loaders: ['eslint-loader'],
+        include: /src/
+      },
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.jsx$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        loaders: ['style-loader', 'css-loader'],
+        exclude: /node_modules/
+      }
     ]
   },
   plugins: [HtmlWebpackPluginConfig]

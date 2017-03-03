@@ -12,6 +12,7 @@
   "dependencies": {
     "babel-eslint": "^7.1.1",
     "babel-polyfill": "^6.23.0",
+    "css-loader": "^0.26.2",
     "esdoc": "^0.5.2",
     "eslint": "^3.16.1",
     "eslint-loader": "^1.6.3",
@@ -32,6 +33,7 @@
     "react-dom": "^15.4.2",
     "sinon": "next",
     "sinon-stub-promise": "^4.0.0",
+    "style-loader": "^0.13.2",
     "text-loader": "^0.0.1",
     "webpack": "^2.2.1",
     "webpack-dev-server": "^2.4.1"

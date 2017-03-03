@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
 
+import './photos.css';
+
 /**
  * Photos presentational container
  */
@@ -15,8 +17,18 @@ export default class Photos extends React.Component {
       <div className="photos">
         {photos.map((photo) =>
           <div key={photo.id} className="photo">
-            <p>{photo.title} - {photo.owner}</p>
-            <img src={photo.url} alt={photo.title} height="300" width="300"/>
+            <div className="photo-credits">
+              <div className="photo-title">
+                {photo.title}
+              </div>
+              <div className="photo-owner">
+                {photo.owner}
+              </div>
+            </div>
+            <img
+              alt={photo.title}
+              className="photo-img"
+              src={photo.url} />
           </div>
         )}
       </div>

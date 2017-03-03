@@ -1,0 +1,85 @@
+.photos {
+  column-count: 1;
+  column-gap: 0px;
+}
+
+.photo {
+  cursor: zoom-in;
+  max-width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.photo::before {
+  background: rgba(79, 58, 75, .8);
+  bottom: 0;
+  content: '';
+  display: block;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: opacity .3s;
+}
+
+.photo:hover::before {
+  opacity: 1;
+}
+
+.photo-credits {
+  bottom: calc(-2.5rem - 25px);
+  color: #e9504e;
+  font-weight: bold;
+  max-height: 2.5rem;
+  max-width: calc(100% - 25px);
+  padding: 10px 10px 15px 15px;
+  position: absolute;
+  transition: bottom .3s;
+}
+
+.photo:hover .photo-credits {
+  bottom: 0;
+}
+
+.photo-title {
+  line-height: 1rem;
+  margin-bottom: .5rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.photo-owner {
+  line-height: 1rem;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.photo-img {
+  display: block;
+  height: auto;
+  max-width: 100%;
+}
+
+@media(min-width:768px) {
+  .photos {
+    column-count: 2;
+  }
+}
+
+@media(min-width:992px) {
+  .photos {
+    column-count: 3;
+  }
+
+}
+
+@media(min-width:1200px) {
+  .photos {
+    column-count: 4;
+  }
+}
