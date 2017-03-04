@@ -1,0 +1,28 @@
+.lightbox {
+  background: rgba(0, 0, 0, .8);
+  bottom: 0;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.lightbox-credits {
+  background: rgb(79, 58, 75, .8);
+  bottom: 40px;
+  color: #e9504e;
+  font-weight: bold;
+  max-width: calc(100%- 120px);
+  padding: 15px;
+  position: absolute;
+  right: 60px;
+}
+
+.lightbox-img {
+  cursor: zoom-out;
+  left: 50%;
+  max-width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}

@@ -1,13 +1,16 @@
 import assert from 'assert';
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
+import sinon from 'sinon';
 
 import PhotoContainer from '../src/components/PhotoContainer.jsx';
 import Photo from '../src/components/Photo.jsx';
 
 const {
   renderIntoDocument,
-  findRenderedComponentWithType
+  findRenderedComponentWithType,
+  findRenderedDOMComponentWithClass,
+  Simulate
 } = ReactTestUtils;
 
 /** @test {PhotoContainer} */
@@ -17,11 +20,15 @@ describe('PhotoContainer', () => {
     title: 'sample-title',
     url: 'http://www.example.com/image.jpg'
   };
+  const fakeFunctions = {
+    onSelect: () => null
+  };
 
   /** @test {PhotoContainer#render} */
   it('renders correct photo', () => {
     const photoContainer = renderIntoDocument(
       <PhotoContainer
+        onSelect={fakeFunctions.onSelect}
         photo={photoData}
         scrollPosition={0} />
     );
@@ -37,6 +44,7 @@ describe('PhotoContainer', () => {
   it('loads image if visible', () => {
     const photoContainer = renderIntoDocument(
       <PhotoContainer
+        onSelect={fakeFunctions.onSelect}
         photo={photoData}
         scrollPosition={100} />
     );
@@ -52,6 +60,7 @@ describe('PhotoContainer', () => {
   it('doesn\'t load image if not visible', () => {
     const photoContainer = renderIntoDocument(
       <PhotoContainer
+        onSelect={fakeFunctions.onSelect}
         photo={photoData}
         scrollPosition={-100} />
     );
@@ -67,6 +76,7 @@ describe('PhotoContainer', () => {
   it('display image if it was already loaded', () => {
     const photoContainer = renderIntoDocument(
       <PhotoContainer
+        onSelect={fakeFunctions.onSelect}
         photo={photoData}
         scrollPosition={-100} />
     );
@@ -80,5 +90,24 @@ describe('PhotoContainer', () => {
     const photo = findRenderedComponentWithType(photoContainer, Photo);
 
     assert(photo.props.load);
+  });
+
+  /** @test {PhotoContainer#onSelect} */
+  it('triggers on select', () => {
+    sinon.spy(fakeFunctions, 'onSelect');
+
+    const photoContainer = renderIntoDocument(
+      <PhotoContainer
+        onSelect={fakeFunctions.onSelect}
+        photo={photoData}
+        scrollPosition={-100} />
+    );
+    const image = findRenderedDOMComponentWithClass(photoContainer, 'photo');
+
+    Simulate.click(image);
+
+    assert(fakeFunctions.onSelect.calledOnce);
+
+    fakeFunctions.onSelect.restore();
   });
 });

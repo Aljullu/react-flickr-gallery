@@ -8,10 +8,12 @@ import photosFixture from 'text-loader!./fixtures/photos.xml';
 import formattedPhotosFixture
   from 'text-loader!./fixtures/formattedPhotos.json';
 import Gallery from '../src/components/Gallery.jsx';
+import Lightbox from '../src/components/Lightbox.jsx';
 import PhotoContainer from '../src/components/PhotoContainer.jsx';
 
 const {
   renderIntoDocument,
+  findRenderedComponentWithType,
   scryRenderedComponentsWithType
 } = ReactTestUtils;
 
@@ -79,6 +81,69 @@ describe('Gallery', () => {
 
     assert.equal(JSON.stringify(parsedPhotos),
       JSON.stringify(JSON.parse(formattedPhotosFixture).photos));
+  });
+
+  /** @test {Gallery#onSelectPhoto} */
+  it('sets correct selectedPhoto value in the state', () => {
+    const photosData = [{
+      id: '123',
+      owner: 'lorem-ipsum',
+      title: 'sample-title',
+      url: 'http://www.example.com/image.jpg'
+    }];
+    const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+
+    gallery.setState({
+      photos: photosData
+    });
+
+    const photos = scryRenderedComponentsWithType(gallery, PhotoContainer);
+
+    photos[0].props.onSelect();
+
+    assert.equal(gallery.state.selectedPhoto, photosData[0].id);
+  });
+
+  /** @test {Gallery#getSelectedPhotoData} */
+  it('sends correct photo values to the Lightbox component', () => {
+    const photosData = [{
+      id: '123',
+      owner: 'lorem-ipsum',
+      title: 'sample-title',
+      url: 'http://www.example.com/image.jpg'
+    }];
+    const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+
+    gallery.setState({
+      photos: photosData,
+      selectedPhoto: '123'
+    });
+
+    const lightbox = findRenderedComponentWithType(gallery, Lightbox);
+
+    assert.equal(lightbox.props.photo.owner, photosData[0].owner);
+    assert.equal(lightbox.props.photo.title, photosData[0].title);
+    assert.equal(lightbox.props.photo.url, photosData[0].url);
+  });
+
+  /** @test {Gallery#noLightbox} */
+  it('does not render lightbox if no photo is selected', () => {
+    const photosData = [{
+      id: '123',
+      owner: 'lorem-ipsum',
+      title: 'sample-title',
+      url: 'http://www.example.com/image.jpg'
+    }];
+    const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+
+    gallery.setState({
+      photos: photosData,
+      selectedPhoto: null
+    });
+
+    const lightboxes = scryRenderedComponentsWithType(gallery, Lightbox);
+
+    assert.equal(lightboxes, 0);
   });
 
   describe('scroll position', () => {

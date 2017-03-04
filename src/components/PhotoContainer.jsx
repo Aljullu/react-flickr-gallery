@@ -68,10 +68,13 @@ export default class PhotoContainer extends React.Component {
   }
 
   render() {
-    const {photo} = this.props;
+    const {onSelect, photo} = this.props;
 
     return (
-      <div className="photo" ref="photo">
+      <div
+        className="photo"
+        onClick={onSelect}
+        ref="photo">
         <Photo
           load={this.state.displayImage}
           owner={photo.owner}
@@ -83,6 +86,7 @@ export default class PhotoContainer extends React.Component {
 }
 
 PhotoContainer.propTypes = {
+  onSelect: PropTypes.func.isRequired,
   photo: PropTypes.shape({
     owner: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,

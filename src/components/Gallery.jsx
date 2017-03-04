@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 
+import Lightbox from './Lightbox.jsx';
 import PhotoContainer from './PhotoContainer.jsx';
 
 /**
@@ -11,7 +12,8 @@ export default class Gallery extends React.Component {
 
     this.state = {
       photos: [],
-      scrollPosition: -1
+      scrollPosition: -1,
+      selectedPhoto: null
     };
 
     this.fetchPhotos(this.props.galleryId);
@@ -137,17 +139,55 @@ export default class Gallery extends React.Component {
     });
   }
 
+  /**
+   * Generate a function to save the current photo id to the state
+   * as the selected photo
+   * @param {string} photoId - id of the photo to select
+   * @return {function} function that sets the selectedPhoto state value to the
+   * photo id provided in the params
+   */
+  onSelectPhoto(photoId) {
+    return () => {
+      this.setState({
+        selectedPhoto: photoId
+      });
+    };
+  }
+
+  /**
+   * Search in the photos array from the state for the selected photo
+   * and return its data
+   * @return {object} data of the selected photo or null if no photo is selected
+   */
+  getSelectedPhotoData() {
+    const {photos, selectedPhoto} = this.state;
+
+    if (selectedPhoto) {
+      return photos.filter((photo) => photo.id === selectedPhoto)[0];
+    }
+
+    return null;
+  }
+
   render() {
     const {photos, scrollPosition} = this.state;
+
+    const selectedPhotoData = this.getSelectedPhotoData();
 
     return (
       <div>
         {photos.map((photo) =>
           <PhotoContainer
             key={photo.id}
+            onSelect={this.onSelectPhoto(photo.id).bind(this)}
             photo={photo}
             scrollPosition={scrollPosition} />
         )}
+        {selectedPhotoData ?
+          <Lightbox
+            onClose={this.onSelectPhoto(null).bind(this)}
+            photo={selectedPhotoData} /> :
+        null}
       </div>
     );
   }
