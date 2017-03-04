@@ -1,13 +1,11 @@
-.photos {
-  column-count: 1;
-  column-gap: 0px;
-}
-
 .photo {
   cursor: zoom-in;
-  max-width: 100%;
+  display: inline-block;
+  max-width: calc(100% - 6px);
   overflow: hidden;
+  padding: 2px 3px;
   position: relative;
+  vertical-align: middle;
 }
 
 .photo::before {
@@ -65,21 +63,25 @@
   max-width: 100%;
 }
 
+.photo-placeholder {
+  height: 300px;
+  width: 100vw;
+}
+
 @media(min-width:768px) {
-  .photos {
-    column-count: 2;
+  .photo {
+    max-width: calc(50% - 6px);
   }
 }
 
 @media(min-width:992px) {
-  .photos {
-    column-count: 3;
+  .photo {
+    max-width: calc(33% - 6px);
   }
-
 }
 
 @media(min-width:1200px) {
-  .photos {
-    column-count: 4;
+  .photo {
+    max-width: calc(25% - 6px);
   }
 }

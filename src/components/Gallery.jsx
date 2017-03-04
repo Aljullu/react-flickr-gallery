@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import Photos from './Photos.jsx';
+import PhotoContainer from './PhotoContainer.jsx';
 
 /**
  * Gallery Container Component that loads the photos data
@@ -10,18 +10,62 @@ export default class Gallery extends React.Component {
     super(props);
 
     this.state = {
-      photos: []
+      photos: [],
+      scrollPosition: -1
     };
 
     this.fetchPhotos(this.props.galleryId);
   }
 
+  /**
+   * Fetch photos when the galleryId changes
+   * @param {object} nextProps - new props
+   */
   componentWillReceiveProps(nextProps) {
     if (nextProps &&
       nextProps.galleryId &&
       this.props.galleryId !== nextProps.galleryId) {
       this.fetchPhotos(nextProps.galleryId);
     }
+  }
+
+  /**
+   * Add listeners for scroll and resize on component mount
+   */
+  componentDidMount() {
+    window.addEventListener('scroll', this.onScroll.bind(this));
+    window.addEventListener('resize', this.onResize.bind(this));
+  }
+
+  /**
+   * Remove listeners for scroll and resize on component unmount
+   */
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll.bind(this));
+    window.removeEventListener('resize', this.onResize.bind(this));
+  }
+
+  /**
+   * Update scrollPosition value in state on scroll if the new scroll is greater
+   * than the previous one
+   */
+  onScroll() {
+    const newScroll = window.scrollY;
+
+    this.setState({
+      scrollPosition: Math.max(this.state.scrollPosition, newScroll)
+    });
+  }
+
+  /**
+   * Update scrollPosition value in state on resize
+   */
+  onResize() {
+    const newScroll = window.scrollY;
+
+    this.setState({
+      scrollPosition: newScroll
+    });
   }
 
   /**
@@ -94,11 +138,17 @@ export default class Gallery extends React.Component {
   }
 
   render() {
-    const {photos} = this.state;
+    const {photos, scrollPosition} = this.state;
 
     return (
-      <Photos
-        photos={photos} />
+      <div>
+        {photos.map((photo) =>
+          <PhotoContainer
+            key={photo.id}
+            photo={photo}
+            scrollPosition={scrollPosition} />
+        )}
+      </div>
     );
   }
 }

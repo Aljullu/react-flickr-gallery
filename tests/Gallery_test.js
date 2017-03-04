@@ -5,13 +5,14 @@ import sinon from 'sinon';
 import sinonStubPromise from 'sinon-stub-promise';
 
 import photosFixture from 'text-loader!./fixtures/photos.xml';
-import formattedPhotosFixture from 'text-loader!./fixtures/formattedPhotos.json';
+import formattedPhotosFixture
+  from 'text-loader!./fixtures/formattedPhotos.json';
 import Gallery from '../src/components/Gallery.jsx';
-import Photos from '../src/components/Photos.jsx';
+import PhotoContainer from '../src/components/PhotoContainer.jsx';
 
 const {
   renderIntoDocument,
-  findRenderedComponentWithType
+  scryRenderedComponentsWithType
 } = ReactTestUtils;
 
 sinonStubPromise(sinon);
@@ -32,11 +33,24 @@ describe('Gallery', () => {
   });
 
   /** @test {Gallery#render} */
-  it('renders gallery', () => {
+  it('renders correct images', () => {
+    const photosData = [{
+      id: '123',
+      owner: 'lorem-ipsum',
+      title: 'sample-title',
+      url: 'http://www.example.com/image.jpg'
+    }];
     const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
-    const photos = findRenderedComponentWithType(gallery, Photos);
 
-    assert(photos);
+    gallery.setState({
+      photos: photosData
+    });
+
+    const photos = scryRenderedComponentsWithType(gallery, PhotoContainer);
+
+    assert.equal(photos.length, 1);
+    assert.equal(photos[0].props.photo.url, photosData[0].url);
+    assert.equal(photos[0].props.photo.title, photosData[0].title);
   });
 
   /** @test {Gallery#formatUrl} */
@@ -65,5 +79,44 @@ describe('Gallery', () => {
 
     assert.equal(JSON.stringify(parsedPhotos),
       JSON.stringify(JSON.parse(formattedPhotosFixture).photos));
+  });
+
+  describe('scroll position', () => {
+    /** @test {Gallery#onScroll} */
+    it('gets updated when scrolling down', () => {
+      const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+
+      window.scrollY = 321;
+
+      gallery.onScroll();
+
+      assert.equal(gallery.state.scrollPosition, 321);
+    });
+
+    /** @test {Gallery#onScrollDown} */
+    it('doesn\'t get updated when scrolling up', () => {
+      const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+
+      gallery.setState({
+        scrollPosition: 987
+      });
+
+      window.scrollY = 321;
+
+      gallery.onScroll();
+
+      assert.equal(gallery.state.scrollPosition, 987);
+    });
+
+    /** @test {Gallery#onResize} */
+    it('gets updated on resize', () => {
+      const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+
+      window.scrollY = 123;
+
+      gallery.onResize();
+
+      assert.equal(gallery.state.scrollPosition, 123);
+    });
   });
 });
