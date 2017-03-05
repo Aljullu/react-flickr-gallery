@@ -43,6 +43,6 @@ module.exports = {
   },
   plugins: [HtmlWebpackPluginConfig,
     new webpack.ProvidePlugin({
-      'fetch': 'imports?this=>global!exports?global.fetch!whatwg-fetch'
+      fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     })]
 };
