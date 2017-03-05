@@ -52,7 +52,7 @@ export default class Gallery extends React.Component {
    * than the previous one
    */
   onScroll() {
-    const newScroll = window.scrollY;
+    const newScroll = window.pageYOffset;
 
     this.setState({
       scrollPosition: Math.max(this.state.scrollPosition, newScroll)
@@ -63,7 +63,7 @@ export default class Gallery extends React.Component {
    * Update scrollPosition value in state on resize
    */
   onResize() {
-    const newScroll = window.scrollY;
+    const newScroll = window.pageYOffset;
 
     this.setState({
       scrollPosition: newScroll
