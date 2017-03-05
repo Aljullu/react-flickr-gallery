@@ -3,7 +3,8 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import sinon from 'sinon';
 
-import GallerySelector from '../src/components/GallerySelector.jsx';
+import GallerySelector
+  from '../src/components/GallerySelector/GallerySelector.jsx';
 
 const {
   renderIntoDocument,

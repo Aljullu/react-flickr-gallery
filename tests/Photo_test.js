@@ -2,7 +2,7 @@ import assert from 'assert';
 import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 
-import Photo from '../src/components/Photo.jsx';
+import Photo from '../src/components/Photo/Photo.jsx';
 
 const {
   renderIntoDocument,

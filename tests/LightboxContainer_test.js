@@ -7,8 +7,9 @@ import sinonStubPromise from 'sinon-stub-promise';
 import photoFixture from 'text-loader!./fixtures/photo.xml';
 import formattedPhotoFixture
   from 'text-loader!./fixtures/formattedPhoto.json';
-import LightboxContainer from '../src/components/LightboxContainer.jsx';
-import Lightbox from '../src/components/Lightbox.jsx';
+import LightboxContainer
+  from '../src/components/LightboxContainer/LightboxContainer.jsx';
+import Lightbox from '../src/components/Lightbox/Lightbox.jsx';
 
 const {
   renderIntoDocument,

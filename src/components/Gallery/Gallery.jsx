@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react';
 
-import LightboxContainer from './LightboxContainer.jsx';
-import PhotoContainer from './PhotoContainer.jsx';
+import LightboxContainer from '../LightboxContainer/LightboxContainer.jsx';
+import PhotoContainer from '../PhotoContainer/PhotoContainer.jsx';
 
 /**
  * Gallery Container Component that loads the photos data

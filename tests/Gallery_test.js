@@ -7,9 +7,11 @@ import sinonStubPromise from 'sinon-stub-promise';
 import photosFixture from 'text-loader!./fixtures/photos.xml';
 import formattedPhotosFixture
   from 'text-loader!./fixtures/formattedPhotos.json';
-import Gallery from '../src/components/Gallery.jsx';
-import LightboxContainer from '../src/components/LightboxContainer.jsx';
-import PhotoContainer from '../src/components/PhotoContainer.jsx';
+import Gallery from '../src/components/Gallery/Gallery.jsx';
+import LightboxContainer
+  from '../src/components/LightboxContainer/LightboxContainer.jsx';
+import PhotoContainer
+  from '../src/components/PhotoContainer/PhotoContainer.jsx';
 
 const {
   renderIntoDocument,

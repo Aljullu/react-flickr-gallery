@@ -3,8 +3,9 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import sinon from 'sinon';
 
-import PhotoContainer from '../src/components/PhotoContainer.jsx';
-import Photo from '../src/components/Photo.jsx';
+import PhotoContainer
+  from '../src/components/PhotoContainer/PhotoContainer.jsx';
+import Photo from '../src/components/Photo/Photo.jsx';
 
 const {
   renderIntoDocument,

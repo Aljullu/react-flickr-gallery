@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Gallery from './Gallery.jsx';
-import GallerySelector from './GallerySelector.jsx';
+import Gallery from '../Gallery/Gallery.jsx';
+import GallerySelector from '../GallerySelector/GallerySelector.jsx';
 
 /**
  * App Root Component, contains the app

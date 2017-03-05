@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import Lightbox from './Lightbox.jsx';
+import Lightbox from '../Lightbox/Lightbox.jsx';
 
 /**
  * Lightbox Container component

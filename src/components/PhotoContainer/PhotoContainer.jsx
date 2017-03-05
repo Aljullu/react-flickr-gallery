@@ -1,8 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import Photo from './Photo.jsx';
-
-import './photo.css';
+import Photo from '../Photo/Photo.jsx';
 
 /**
  * Photo container

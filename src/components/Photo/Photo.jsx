@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
 
+import './photo.css';
+
 /**
  * Photo presentational component
  */

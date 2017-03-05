@@ -3,7 +3,7 @@ import React from 'react';
 import ReactTestUtils from 'react-addons-test-utils';
 import sinon from 'sinon';
 
-import Lightbox from '../src/components/Lightbox.jsx';
+import Lightbox from '../src/components/Lightbox/Lightbox.jsx';
 
 const {
   renderIntoDocument,

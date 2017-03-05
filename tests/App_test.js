@@ -4,9 +4,10 @@ import ReactTestUtils from 'react-addons-test-utils';
 import sinon from 'sinon';
 import sinonStubPromise from 'sinon-stub-promise';
 
-import App from '../src/components/App.jsx';
-import Gallery from '../src/components/Gallery.jsx';
-import GallerySelector from '../src/components/GallerySelector.jsx';
+import App from '../src/components/App/App.jsx';
+import Gallery from '../src/components/Gallery/Gallery.jsx';
+import GallerySelector
+  from '../src/components/GallerySelector/GallerySelector.jsx';
 
 const {
   renderIntoDocument,
