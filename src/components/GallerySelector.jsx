@@ -1,5 +1,7 @@
 import React, {PropTypes} from 'react';
 
+import './gallery-selector.css';
+
 /**
  * Gallery Selector
  */
@@ -8,9 +10,10 @@ export default class GallerySelector extends React.Component {
     const {galleries, selectedGallery, onGalleryClick} = this.props;
 
     return (
-      <div>
+      <div className="gallery-selector">
         {galleries.map((gallery) =>
           <button
+            className="gallery-selector-button"
             key={gallery.name}
             disabled={selectedGallery === gallery.id}
             onClick={onGalleryClick(gallery.id)}>

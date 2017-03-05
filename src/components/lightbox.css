@@ -39,6 +39,7 @@
 .lightbox-img {
   cursor: zoom-out;
   left: 50%;
+  max-height: 100vh;
   max-width: 100%;
   position: absolute;
   top: 50%;

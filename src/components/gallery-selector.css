@@ -1,0 +1,19 @@
+.gallery-selector {
+  text-align: center;
+}
+
+.gallery-selector-button {
+  background: linear-gradient(to bottom, rgba(188, 95, 62, 1) 0%, rgba(189, 80, 40, 1) 100%);
+  border: 1px solid #a55324;
+  border-radius: 3px;
+  color: rgb(255, 255, 255);
+  font-size: 2em;
+  margin: .2em;
+  padding: 5px 50px;
+  text-shadow: 1px 1px rgba(0, 0, 0, .25);
+  text-transform: uppercase;
+}
+
+.gallery-selector-button[disabled] {
+  opacity: .6;
+}

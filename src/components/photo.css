@@ -1,11 +1,11 @@
 .photo {
   cursor: zoom-in;
   display: inline-block;
-  max-width: calc(100% - 6px);
+  margin: 2px 2px;
   overflow: hidden;
-  padding: 2px 3px;
   position: relative;
   vertical-align: middle;
+  width: calc(100% - 4px);
 }
 
 .photo::before {
@@ -49,18 +49,18 @@
   white-space: nowrap;
 }
 
-.photo-owner {
-  line-height: 1rem;
+.photo-img {
+  color: transparent;
+  display: block;
   max-width: 100%;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
 }
 
-.photo-img {
-  display: block;
-  height: auto;
-  max-width: 100%;
+@supports (object-fit: cover) {
+  .photo-img {
+    height: 300px;
+    object-fit: cover;
+    width: 100%;
+  }
 }
 
 .photo-placeholder {
@@ -70,18 +70,18 @@
 
 @media(min-width:768px) {
   .photo {
-    max-width: calc(50% - 6px);
+    width: calc(50% - 6px);
   }
 }
 
 @media(min-width:992px) {
   .photo {
-    max-width: calc(33% - 6px);
+    width: calc(33% - 6px);
   }
 }
 
 @media(min-width:1200px) {
   .photo {
-    max-width: calc(25% - 6px);
+    width: calc(25% - 6px);
   }
 }
