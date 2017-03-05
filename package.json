@@ -36,7 +36,8 @@
     "style-loader": "^0.13.2",
     "text-loader": "^0.0.1",
     "webpack": "^2.2.1",
-    "webpack-dev-server": "^2.4.1"
+    "webpack-dev-server": "^2.4.1",
+    "whatwg-fetch": "^2.0.3"
   },
   "devDependencies": {
     "babel-core": "^6.23.1",
