@@ -16,6 +16,17 @@
   padding: 15px;
   position: absolute;
   right: 60px;
+  z-index: 2
+}
+
+.lightbox-owner {
+  color: #e9504e;
+}
+
+.lightbox-owner:hover,
+.lightbox-owner:focus,
+.lightbox-owner:active {
+  opacity: .8;
 }
 
 .lightbox-img {

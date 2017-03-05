@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import Lightbox from './Lightbox.jsx';
+import LightboxContainer from './LightboxContainer.jsx';
 import PhotoContainer from './PhotoContainer.jsx';
 
 /**
@@ -96,7 +96,6 @@ export default class Gallery extends React.Component {
     const photoNodes = nodes.filter((node) => node.tagName === 'photo');
     const photos = photoNodes.map((node) => {
       const id = node.attributes[0].nodeValue;
-      const owner = node.attributes[1].nodeValue;
       const secret = node.attributes[2].nodeValue;
       const server = node.attributes[3].nodeValue;
       const farm = node.attributes[4].nodeValue;
@@ -104,7 +103,6 @@ export default class Gallery extends React.Component {
 
       return {
         id: id,
-        owner: owner,
         title: title,
         url: this.formatUrl(farm, server, id, secret)
       };
@@ -184,7 +182,7 @@ export default class Gallery extends React.Component {
             scrollPosition={scrollPosition} />
         )}
         {selectedPhotoData ?
-          <Lightbox
+          <LightboxContainer
             onClose={this.onSelectPhoto(null).bind(this)}
             photo={selectedPhotoData} /> :
         null}

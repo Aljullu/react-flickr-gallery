@@ -9,7 +9,7 @@ export default class PhotoImage extends React.Component {
   }
 
   render() {
-    const {load, owner, title, url} = this.props;
+    const {load, title, url} = this.props;
 
     if (!load) {
       return (
@@ -23,9 +23,6 @@ export default class PhotoImage extends React.Component {
           <div className="photo-title">
             {title}
           </div>
-          <div className="photo-owner">
-            {owner}
-          </div>
         </div>
         <img
           alt={title}
@@ -38,7 +35,6 @@ export default class PhotoImage extends React.Component {
 
 PhotoImage.propTypes = {
   load: PropTypes.bool.isRequired,
-  owner: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired
 };

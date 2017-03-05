@@ -14,7 +14,6 @@ const {
 /** @test {Lightbox} */
 describe('Lightbox', () => {
   const photoData = {
-    owner: 'lorem-ipsum',
     title: 'sample-title',
     url: 'http://www.example.com/image.jpg'
   };

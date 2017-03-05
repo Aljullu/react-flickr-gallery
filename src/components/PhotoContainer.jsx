@@ -77,7 +77,6 @@ export default class PhotoContainer extends React.Component {
         ref="photo">
         <Photo
           load={this.state.displayImage}
-          owner={photo.owner}
           title={photo.title}
           url={photo.url} />
       </div>
@@ -88,7 +87,6 @@ export default class PhotoContainer extends React.Component {
 PhotoContainer.propTypes = {
   onSelect: PropTypes.func.isRequired,
   photo: PropTypes.shape({
-    owner: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired
   }).isRequired,

@@ -3,7 +3,7 @@ import React, {PropTypes} from 'react';
 import './lightbox.css';
 
 /**
- * Lightbox component
+ * Lightbox Presentational component
  */
 export default class Lightbox extends React.Component {
   constructor(props) {
@@ -12,7 +12,7 @@ export default class Lightbox extends React.Component {
 
   render() {
     const {onClose} = this.props;
-    const {owner, title, url} = this.props.photo;
+    const {date, link, owner, title, url} = this.props.photo;
 
     return (
       <div className="lightbox" onClick={onClose}>
@@ -20,9 +20,16 @@ export default class Lightbox extends React.Component {
           <div className="lightbox-title">
             {title}
           </div>
-          <div className="lightbox-owner">
-            {owner}
-          </div>
+          {link && owner ? (
+            <a
+              className="lightbox-owner"
+              href={link}>
+              {owner}
+            </a>
+          ) : null}
+          {link && owner && date ? (
+            <span> - {date}</span>
+          ) : null}
         </div>
         <img
           alt={title}
@@ -36,8 +43,10 @@ export default class Lightbox extends React.Component {
 Lightbox.propTypes = {
   onClose: PropTypes.func.isRequired,
   photo: PropTypes.shape({
-    owner: PropTypes.string.isRequired,
+    date: PropTypes.string,
+    link: PropTypes.string,
+    owner: PropTypes.string,
     title: PropTypes.string.isRequired,
-    url: PropTypes.string.isRequired
+    url: PropTypes.string
   }).isRequired
 };

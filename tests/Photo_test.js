@@ -12,7 +12,6 @@ const {
 /** @test {Photo} */
 describe('Photo', () => {
   const photoData = {
-    owner: 'lorem-ipsum',
     title: 'sample-title',
     url: 'http://www.example.com/image.jpg'
   };
@@ -22,7 +21,6 @@ describe('Photo', () => {
     const photoContainer = renderIntoDocument(
       <Photo
         load={true}
-        owner={photoData.owner}
         title={photoData.title}
         url={photoData.url} />
     );
@@ -38,7 +36,6 @@ describe('Photo', () => {
     const photoContainer = renderIntoDocument(
       <Photo
         load={false}
-        owner={photoData.owner}
         title={photoData.title}
         url={photoData.url} />
     );

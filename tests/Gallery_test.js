@@ -8,7 +8,7 @@ import photosFixture from 'text-loader!./fixtures/photos.xml';
 import formattedPhotosFixture
   from 'text-loader!./fixtures/formattedPhotos.json';
 import Gallery from '../src/components/Gallery.jsx';
-import Lightbox from '../src/components/Lightbox.jsx';
+import LightboxContainer from '../src/components/LightboxContainer.jsx';
 import PhotoContainer from '../src/components/PhotoContainer.jsx';
 
 const {
@@ -38,7 +38,6 @@ describe('Gallery', () => {
   it('renders correct images', () => {
     const photosData = [{
       id: '123',
-      owner: 'lorem-ipsum',
       title: 'sample-title',
       url: 'http://www.example.com/image.jpg'
     }];
@@ -87,7 +86,6 @@ describe('Gallery', () => {
   it('sets correct selectedPhoto value in the state', () => {
     const photosData = [{
       id: '123',
-      owner: 'lorem-ipsum',
       title: 'sample-title',
       url: 'http://www.example.com/image.jpg'
     }];
@@ -105,10 +103,9 @@ describe('Gallery', () => {
   });
 
   /** @test {Gallery#getSelectedPhotoData} */
-  it('sends correct photo values to the Lightbox component', () => {
+  it('sends correct photo values to the LightboxContainer component', () => {
     const photosData = [{
       id: '123',
-      owner: 'lorem-ipsum',
       title: 'sample-title',
       url: 'http://www.example.com/image.jpg'
     }];
@@ -119,9 +116,8 @@ describe('Gallery', () => {
       selectedPhoto: '123'
     });
 
-    const lightbox = findRenderedComponentWithType(gallery, Lightbox);
+    const lightbox = findRenderedComponentWithType(gallery, LightboxContainer);
 
-    assert.equal(lightbox.props.photo.owner, photosData[0].owner);
     assert.equal(lightbox.props.photo.title, photosData[0].title);
     assert.equal(lightbox.props.photo.url, photosData[0].url);
   });
@@ -130,7 +126,6 @@ describe('Gallery', () => {
   it('does not render lightbox if no photo is selected', () => {
     const photosData = [{
       id: '123',
-      owner: 'lorem-ipsum',
       title: 'sample-title',
       url: 'http://www.example.com/image.jpg'
     }];
@@ -141,7 +136,8 @@ describe('Gallery', () => {
       selectedPhoto: null
     });
 
-    const lightboxes = scryRenderedComponentsWithType(gallery, Lightbox);
+    const lightboxes =
+      scryRenderedComponentsWithType(gallery, LightboxContainer);
 
     assert.equal(lightboxes, 0);
   });

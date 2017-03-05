@@ -16,7 +16,6 @@ const {
 /** @test {PhotoContainer} */
 describe('PhotoContainer', () => {
   const photoData = {
-    owner: 'lorem-ipsum',
     title: 'sample-title',
     url: 'http://www.example.com/image.jpg'
   };
@@ -37,7 +36,6 @@ describe('PhotoContainer', () => {
 
     assert.equal(photo.props.url, photoData.url);
     assert.equal(photo.props.title, photoData.title);
-    assert.equal(photo.props.owner, photoData.owner);
   });
 
   /** @test {PhotoContainer#isPhotoInViewportVisible} */
