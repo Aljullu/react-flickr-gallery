@@ -43,7 +43,11 @@ describe('Gallery', () => {
       title: 'sample-title',
       url: 'http://www.example.com/image.jpg'
     }];
-    const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+    const gallery = renderIntoDocument(
+      <Gallery
+        galleryId={galleryId}
+        scrollPosition={-1} />
+    );
 
     gallery.setState({
       photos: photosData
@@ -58,7 +62,11 @@ describe('Gallery', () => {
 
   /** @test {Gallery#formatUrl} */
   it('correctly formats photo URLs', () => {
-    const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+    const gallery = renderIntoDocument(
+      <Gallery
+        galleryId={galleryId}
+        scrollPosition={-1} />
+    );
 
     const formattedUrl = gallery.formatUrl('A', 'B', 'C', 'D');
 
@@ -67,7 +75,11 @@ describe('Gallery', () => {
 
   /** @test {Gallery#fetchPhotos} */
   it('correctly fetches photos', () => {
-    renderIntoDocument(<Gallery galleryId={galleryId} />);
+    const gallery = renderIntoDocument(
+      <Gallery
+        galleryId={galleryId}
+        scrollPosition={-1} />
+    );
 
     assert(windowFetch.calledOnce);
     assert.equal(windowFetch.args[0][0],
@@ -76,7 +88,11 @@ describe('Gallery', () => {
 
   /** @test {Gallery#parsePhotosData} */
   it('parses photos data', () => {
-    const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+    const gallery = renderIntoDocument(
+      <Gallery
+        galleryId={galleryId}
+        scrollPosition={-1} />
+    );
 
     const parsedPhotos = gallery.parsePhotosData(photosFixture);
 
@@ -91,7 +107,11 @@ describe('Gallery', () => {
       title: 'sample-title',
       url: 'http://www.example.com/image.jpg'
     }];
-    const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+    const gallery = renderIntoDocument(
+      <Gallery
+        galleryId={galleryId}
+        scrollPosition={-1} />
+    );
 
     gallery.setState({
       photos: photosData
@@ -111,7 +131,11 @@ describe('Gallery', () => {
       title: 'sample-title',
       url: 'http://www.example.com/image.jpg'
     }];
-    const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+    const gallery = renderIntoDocument(
+      <Gallery
+        galleryId={galleryId}
+        scrollPosition={-1} />
+    );
 
     gallery.setState({
       photos: photosData,
@@ -131,7 +155,11 @@ describe('Gallery', () => {
       title: 'sample-title',
       url: 'http://www.example.com/image.jpg'
     }];
-    const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
+    const gallery = renderIntoDocument(
+      <Gallery
+        galleryId={galleryId}
+        scrollPosition={-1} />
+    );
 
     gallery.setState({
       photos: photosData,
@@ -142,44 +170,5 @@ describe('Gallery', () => {
       scryRenderedComponentsWithType(gallery, LightboxContainer);
 
     assert.equal(lightboxes, 0);
-  });
-
-  describe('scroll position', () => {
-    /** @test {Gallery#onScroll} */
-    it('gets updated when scrolling down', () => {
-      const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
-
-      window.scrollY = 321;
-
-      gallery.onScroll();
-
-      assert.equal(gallery.state.scrollPosition, 321);
-    });
-
-    /** @test {Gallery#onScrollDown} */
-    it('doesn\'t get updated when scrolling up', () => {
-      const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
-
-      gallery.setState({
-        scrollPosition: 987
-      });
-
-      window.scrollY = 321;
-
-      gallery.onScroll();
-
-      assert.equal(gallery.state.scrollPosition, 987);
-    });
-
-    /** @test {Gallery#onResize} */
-    it('gets updated on resize', () => {
-      const gallery = renderIntoDocument(<Gallery galleryId={galleryId} />);
-
-      window.scrollY = 123;
-
-      gallery.onResize();
-
-      assert.equal(gallery.state.scrollPosition, 123);
-    });
   });
 });

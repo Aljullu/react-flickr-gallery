@@ -12,7 +12,6 @@ export default class Gallery extends React.Component {
 
     this.state = {
       photos: [],
-      scrollPosition: -1,
       selectedPhoto: null
     };
 
@@ -29,45 +28,6 @@ export default class Gallery extends React.Component {
       this.props.galleryId !== nextProps.galleryId) {
       this.fetchPhotos(nextProps.galleryId);
     }
-  }
-
-  /**
-   * Add listeners for scroll and resize on component mount
-   */
-  componentDidMount() {
-    window.addEventListener('scroll', this.onScroll.bind(this));
-    window.addEventListener('resize', this.onResize.bind(this));
-  }
-
-  /**
-   * Remove listeners for scroll and resize on component unmount
-   */
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll.bind(this));
-    window.removeEventListener('resize', this.onResize.bind(this));
-  }
-
-  /**
-   * Update scrollPosition value in state on scroll if the new scroll is greater
-   * than the previous one
-   */
-  onScroll() {
-    const newScroll = window.scrollY || window.pageYOffset;
-
-    this.setState({
-      scrollPosition: Math.max(this.state.scrollPosition, newScroll)
-    });
-  }
-
-  /**
-   * Update scrollPosition value in state on resize
-   */
-  onResize() {
-    const newScroll = window.scrollY || window.pageYOffset;
-
-    this.setState({
-      scrollPosition: newScroll
-    });
   }
 
   /**
@@ -185,7 +145,8 @@ export default class Gallery extends React.Component {
   }
 
   render() {
-    const {photos, scrollPosition} = this.state;
+    const {scrollPosition} = this.props;
+    const {photos} = this.state;
 
     const selectedPhotoData = this.getSelectedPhotoData();
 
@@ -209,5 +170,6 @@ export default class Gallery extends React.Component {
 }
 
 Gallery.propTypes = {
-  galleryId: PropTypes.string.isRequired
+  galleryId: PropTypes.string.isRequired,
+  scrollPosition: PropTypes.number.isRequired
 };
