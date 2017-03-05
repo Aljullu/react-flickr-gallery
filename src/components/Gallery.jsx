@@ -84,6 +84,23 @@ export default class Gallery extends React.Component {
   }
 
   /**
+   * Given a list of attributes, find the value of one of them given the name
+   * @param {object} attributes - NamedNodeMap of attributes
+   * @param {string} name - name of the attribute to find
+   * @return {string} value of the attribute
+   */
+  getNodeAttribute(attributes, name) {
+    const attributesArray = Array.prototype.slice.call(attributes);
+    const attribute = attributesArray.filter((attr) => attr.name === name)[0];
+
+    if (!attribute) {
+      return null;
+    }
+
+    return attribute.value;
+  }
+
+  /**
    * Given the XML string from the flickr server, generates an array of photos
    * @param {string} data - string with the XML code given by the flickr API
    * @return {object\array} photos - array of photos data
@@ -95,11 +112,11 @@ export default class Gallery extends React.Component {
     const nodes = Array.prototype.slice.call(childNodes);
     const photoNodes = nodes.filter((node) => node.tagName === 'photo');
     const photos = photoNodes.map((node) => {
-      const id = node.attributes[0].nodeValue;
-      const secret = node.attributes[2].nodeValue;
-      const server = node.attributes[3].nodeValue;
-      const farm = node.attributes[4].nodeValue;
-      const title = node.attributes[5].nodeValue;
+      const id = this.getNodeAttribute(node.attributes, 'id');
+      const secret = this.getNodeAttribute(node.attributes, 'secret');
+      const server = this.getNodeAttribute(node.attributes, 'server');
+      const farm = this.getNodeAttribute(node.attributes, 'farm');
+      const title = this.getNodeAttribute(node.attributes, 'title');
 
       return {
         id: id,
