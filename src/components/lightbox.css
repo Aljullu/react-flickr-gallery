@@ -16,7 +16,14 @@
   padding: 15px;
   position: absolute;
   right: 60px;
+  max-width: 30%;
   z-index: 2
+}
+
+.lightbox-description {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .lightbox-owner {
