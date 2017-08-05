@@ -21,7 +21,7 @@ module.exports = {
       {
         enforce: 'pre',
         test: /\.jsx?$/,
-        loaders: ['eslint-loader'],
+        loader: 'eslint-loader',
         include: /src/
       },
       {
@@ -41,8 +41,10 @@ module.exports = {
       }
     ]
   },
-  plugins: [HtmlWebpackPluginConfig,
+  plugins: [
+    HtmlWebpackPluginConfig,
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
-    })]
+    })
+  ]
 };
