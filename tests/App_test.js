@@ -1,6 +1,6 @@
 import assert from 'assert';
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import sinon from 'sinon';
 import sinonStubPromise from 'sinon-stub-promise';
 
@@ -48,44 +48,5 @@ describe('App', () => {
     gallerySelector.props.onGalleryClick('123')();
 
     assert.equal(app.state.selectedGallery, '123');
-  });
-
-  describe('scroll position', () => {
-    /** @test {Gallery#onScroll} */
-    it('gets updated when scrolling down', () => {
-      const app = renderIntoDocument(<App />);
-
-      window.scrollY = 321;
-
-      app.onScroll();
-
-      assert.equal(app.state.scrollPosition, 321);
-    });
-
-    /** @test {Gallery#onScrollDown} */
-    it('doesn\'t get updated when scrolling up', () => {
-      const app = renderIntoDocument(<App />);
-
-      app.setState({
-        scrollPosition: 987
-      });
-
-      window.scrollY = 321;
-
-      app.onScroll();
-
-      assert.equal(app.state.scrollPosition, 987);
-    });
-
-    /** @test {Gallery#onResize} */
-    it('gets updated on resize', () => {
-      const app = renderIntoDocument(<App />);
-
-      window.scrollY = 123;
-
-      app.onResize();
-
-      assert.equal(app.state.scrollPosition, 123);
-    });
   });
 });

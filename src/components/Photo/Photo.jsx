@@ -1,23 +1,21 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 
 import './photo.css';
 
 /**
  * Photo presentational component
  */
-export default class PhotoImage extends React.Component {
+class Photo extends React.Component {
   constructor(props) {
     super(props);
   }
 
   render() {
-    const {load, title, url} = this.props;
+    const {scrollPosition, title, url} = this.props;
 
-    if (!load) {
-      return (
-        <div className="photo-placeholder"></div>
-      );
-    }
+    const placeholder = (<div className="photo-placeholder"></div>);
 
     return (
       <div>
@@ -26,17 +24,20 @@ export default class PhotoImage extends React.Component {
             {title}
           </div>
         </div>
-        <img
+        <LazyLoadImage
           alt={title}
           className="photo-img"
+          placeholder={placeholder}
+          scrollPosition={scrollPosition}
           src={url} />
       </div>
     );
   }
 }
 
-PhotoImage.propTypes = {
-  load: PropTypes.bool.isRequired,
+Photo.propTypes = {
   title: PropTypes.string.isRequired,
   url: PropTypes.string.isRequired
 };
+
+export default Photo;

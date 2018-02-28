@@ -1,12 +1,13 @@
 import assert from 'assert';
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
+import {LazyLoadImage} from 'react-lazy-load-image-component';
 
 import Photo from '../src/components/Photo/Photo.jsx';
 
 const {
   renderIntoDocument,
-  findRenderedDOMComponentWithClass
+  findRenderedComponentWithType
 } = ReactTestUtils;
 
 /** @test {Photo} */
@@ -16,33 +17,22 @@ describe('Photo', () => {
     url: 'http://www.example.com/image.jpg'
   };
 
-  /** @test {Photo#renderImage} */
-  it('renders image', () => {
+  /** @test {Photo#props} */
+  it('sets corrects props to LazyLoadImage component', () => {
+    const scrollPosition = { x: 0, y: 0 };
     const photoContainer = renderIntoDocument(
       <Photo
         load={true}
         title={photoData.title}
-        url={photoData.url} />
+        url={photoData.url}
+        scrollPosition={scrollPosition} />
     );
 
-    const image =
-      findRenderedDOMComponentWithClass(photoContainer, 'photo-img');
+    const lazyLoadImage =
+      findRenderedComponentWithType(photoContainer, LazyLoadImage);
 
-    assert(image);
-  });
-
-  /** @test {Photo#renderPlaceholder} */
-  it('renders placeholder', () => {
-    const photoContainer = renderIntoDocument(
-      <Photo
-        load={false}
-        title={photoData.title}
-        url={photoData.url} />
-    );
-
-    const placeholder =
-      findRenderedDOMComponentWithClass(photoContainer, 'photo-placeholder');
-
-    assert(placeholder);
+    assert.equal(lazyLoadImage.props.alt, photoData.title);
+    assert.equal(lazyLoadImage.props.src, photoData.url);
+    assert.equal(lazyLoadImage.props.scrollPosition, scrollPosition);
   });
 });

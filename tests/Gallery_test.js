@@ -1,13 +1,13 @@
 import assert from 'assert';
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import sinon from 'sinon';
 import sinonStubPromise from 'sinon-stub-promise';
 
 import photosFixture from 'text-loader!./fixtures/photos.xml';
 import formattedPhotosFixture
   from 'text-loader!./fixtures/formattedPhotos.json';
-import Gallery from '../src/components/Gallery/Gallery.jsx';
+import {Gallery} from '../src/components/Gallery/Gallery.jsx';
 import LightboxContainer
   from '../src/components/LightboxContainer/LightboxContainer.jsx';
 import PhotoContainer
@@ -46,7 +46,7 @@ describe('Gallery', () => {
     const gallery = renderIntoDocument(
       <Gallery
         galleryId={galleryId}
-        scrollPosition={-1} />
+        scrollPosition={{ x: 0, y: 0 }} />
     );
 
     gallery.setState({
@@ -65,7 +65,7 @@ describe('Gallery', () => {
     const gallery = renderIntoDocument(
       <Gallery
         galleryId={galleryId}
-        scrollPosition={-1} />
+        scrollPosition={{ x: 0, y: 0 }} />
     );
 
     const formattedUrl = gallery.formatUrl('A', 'B', 'C', 'D');
@@ -91,7 +91,7 @@ describe('Gallery', () => {
     const gallery = renderIntoDocument(
       <Gallery
         galleryId={galleryId}
-        scrollPosition={-1} />
+        scrollPosition={{ x: 0, y: 0 }} />
     );
 
     const parsedPhotos = gallery.parsePhotosData(photosFixture);
@@ -110,7 +110,7 @@ describe('Gallery', () => {
     const gallery = renderIntoDocument(
       <Gallery
         galleryId={galleryId}
-        scrollPosition={-1} />
+        scrollPosition={{ x: 0, y: 0 }} />
     );
 
     gallery.setState({
@@ -134,7 +134,7 @@ describe('Gallery', () => {
     const gallery = renderIntoDocument(
       <Gallery
         galleryId={galleryId}
-        scrollPosition={-1} />
+        scrollPosition={{ x: 0, y: 0 }} />
     );
 
     gallery.setState({
@@ -158,7 +158,7 @@ describe('Gallery', () => {
     const gallery = renderIntoDocument(
       <Gallery
         galleryId={galleryId}
-        scrollPosition={-1} />
+        scrollPosition={{ x: 0, y: 0 }} />
     );
 
     gallery.setState({

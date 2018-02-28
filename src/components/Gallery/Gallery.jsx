@@ -1,4 +1,6 @@
-import React, {PropTypes} from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
+import {trackWindowScroll} from 'react-lazy-load-image-component';
 
 import LightboxContainer from '../LightboxContainer/LightboxContainer.jsx';
 import PhotoContainer from '../PhotoContainer/PhotoContainer.jsx';
@@ -6,7 +8,7 @@ import PhotoContainer from '../PhotoContainer/PhotoContainer.jsx';
 /**
  * Gallery Container Component that loads the photos data
  */
-export default class Gallery extends React.Component {
+export class Gallery extends React.Component {
   constructor(props) {
     super(props);
 
@@ -170,6 +172,7 @@ export default class Gallery extends React.Component {
 }
 
 Gallery.propTypes = {
-  galleryId: PropTypes.string.isRequired,
-  scrollPosition: PropTypes.number.isRequired
+  galleryId: PropTypes.string.isRequired
 };
+
+export default trackWindowScroll(Gallery);

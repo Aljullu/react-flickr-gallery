@@ -1,6 +1,6 @@
 import assert from 'assert';
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import sinon from 'sinon';
 
 import PhotoContainer
@@ -30,65 +30,13 @@ describe('PhotoContainer', () => {
       <PhotoContainer
         onSelect={fakeFunctions.onSelect}
         photo={photoData}
-        scrollPosition={0} />
+        scrollPosition={{ x: 0, y: 0 }} />
     );
 
     const photo = findRenderedComponentWithType(photoContainer, Photo);
 
     assert.equal(photo.props.url, photoData.url);
     assert.equal(photo.props.title, photoData.title);
-  });
-
-  /** @test {PhotoContainer#isPhotoInViewportVisible} */
-  it('loads image if visible', () => {
-    const photoContainer = renderIntoDocument(
-      <PhotoContainer
-        onSelect={fakeFunctions.onSelect}
-        photo={photoData}
-        scrollPosition={100} />
-    );
-
-    window.innerHeight = 100;
-
-    const photo = findRenderedComponentWithType(photoContainer, Photo);
-
-    assert(photo.props.load);
-  });
-
-  /** @test {PhotoContainer#isPhotoInViewportHIdden} */
-  it('doesn\'t load image if not visible', () => {
-    const photoContainer = renderIntoDocument(
-      <PhotoContainer
-        onSelect={fakeFunctions.onSelect}
-        photo={photoData}
-        scrollPosition={-100} />
-    );
-
-    window.innerHeight = -100;
-
-    const photo = findRenderedComponentWithType(photoContainer, Photo);
-
-    assert(!photo.props.load);
-  });
-
-  /** @test {PhotoContainer#shouldPhotoBeDisplayed} */
-  it('display image if it was already loaded', () => {
-    const photoContainer = renderIntoDocument(
-      <PhotoContainer
-        onSelect={fakeFunctions.onSelect}
-        photo={photoData}
-        scrollPosition={-100} />
-    );
-
-    window.innerHeight = -100;
-
-    photoContainer.setState({
-      displayImage: true
-    });
-
-    const photo = findRenderedComponentWithType(photoContainer, Photo);
-
-    assert(photo.props.load);
   });
 
   /** @test {PhotoContainer#onSelect} */
@@ -99,7 +47,7 @@ describe('PhotoContainer', () => {
       <PhotoContainer
         onSelect={fakeFunctions.onSelect}
         photo={photoData}
-        scrollPosition={-100} />
+        scrollPosition={{ x: 0, y: 0 }} />
     );
     const image = findRenderedDOMComponentWithClass(photoContainer, 'photo');
 

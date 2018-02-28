@@ -11,48 +11,8 @@ export default class App extends React.Component {
     super();
 
     this.state = {
-      scrollPosition: -1,
       selectedGallery: '72157677539266623'
     };
-  }
-
-  /**
-   * Add listeners for scroll and resize on component mount
-   */
-  componentDidMount() {
-    window.addEventListener('scroll', this.onScroll.bind(this));
-    window.addEventListener('resize', this.onResize.bind(this));
-  }
-
-  /**
-   * Remove listeners for scroll and resize on component unmount
-   */
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll.bind(this));
-    window.removeEventListener('resize', this.onResize.bind(this));
-  }
-
-  /**
-   * Update scrollPosition value in state on scroll if the new scroll is greater
-   * than the previous one
-   */
-  onScroll() {
-    const newScroll = window.scrollY || window.pageYOffset;
-
-    this.setState({
-      scrollPosition: Math.max(this.state.scrollPosition, newScroll)
-    });
-  }
-
-  /**
-   * Update scrollPosition value in state on resize
-   */
-  onResize() {
-    const newScroll = window.scrollY || window.pageYOffset;
-
-    this.setState({
-      scrollPosition: newScroll
-    });
   }
 
   /**
@@ -65,14 +25,13 @@ export default class App extends React.Component {
   setSelectedGallery(galleryId) {
     return () => {
       this.setState({
-        scrollPosition: -1,
         selectedGallery: galleryId
       });
     };
   }
 
   render() {
-    const {scrollPosition, selectedGallery} = this.state;
+    const {selectedGallery} = this.state;
     const galleries = [{
       id: '72157677539266623',
       name: 'Animals'
@@ -88,8 +47,7 @@ export default class App extends React.Component {
           onGalleryClick={this.setSelectedGallery.bind(this)}
           selectedGallery={selectedGallery} />
         <Gallery
-          galleryId={selectedGallery}
-          scrollPosition={scrollPosition} />
+          galleryId={selectedGallery} />
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import assert from 'assert';
 import React from 'react';
-import ReactTestUtils from 'react-addons-test-utils';
+import ReactTestUtils from 'react-dom/test-utils';
 import sinon from 'sinon';
 
 import GallerySelector
